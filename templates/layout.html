@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="A webapp developed by Cluster Innovation Centre for National Innovation Foundation :)">
+  <meta name="author" content="Yatharth Rai">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+  <title>Employee Management</title>
+
+  <!-- Add Stylesheet -->
+  <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/sticky-footer.css') }}" rel="stylesheet">
+  <!-- Custom Styles if any -->
+  {% block css %}{% endblock %}
+</head>
+
+<body class="text-center">
+  {% block body %}{% endblock %}
+  <footer class="footer">
+      <div class="container">
+        <span class="text-muted">Developed by Cluster Innovation Centre '17 </span>
+      </div>
+    </footer>
+</body>
+
+<body>
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+  <!-- Custom Scripts -->
+  {% block js %}{% endblock %}
+</body>

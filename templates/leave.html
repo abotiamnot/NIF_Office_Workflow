@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block css %}
+<link href="{{ url_for('static', filename='css/starter-template.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+{% include 'includes/navbar.html' %}
+
+<h1>Leave</h1>
+<div class="container">
+  <div class="card card-body bg-light">
+    <form method="POST">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input class="form-check-input" type="radio" name="LeaveType" id="gridRadios1" value="casual" required>
+          <label for="LeaveType">Casual Leave</label>
+        </div>
+        <div class="form-group col-md-6">
+          <input class="form-check-input" type="radio" name="LeaveType" id="gridRadios1" value="sick" required>
+          <label for="LeaveType">Sick Leave</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input class="form-check-input" type="radio" name="LeaveLength" id="gridRadios2" value="half" required>
+          <label for="LeaveType">Half Day</label>
+        </div>
+        <div class="form-group col-md-6">
+          <input class="form-check-input" type="radio" name="LeaveLength" id="gridRadios2" value="full" required>
+          <label for="LeaveType">Full Day</label>
+        </div>
+      </div>
+      <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputDateStart">Starting</label>
+      <input type="date" class="form-control" id="inputDateStart" name="startdate">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputDateEnd">Ending</label>
+      <input type="date" class="form-control" id="inputDateStart" name="enddate">
+    </div>
+  </div>
+  <div>
+    <label for="inputReason">Reason</label>
+    <textarea class="form-control" id="inputReason" rows="10" placeholder="Sick with Tuberculosis / Met with an accident" name="reason" required></textarea>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+    {% endblock %}
