@@ -36,6 +36,23 @@ def login():
             return redirect(url_for('employee_screen'))
     return render_template('signin.html')
 
+@app.route('/register', methods=['GET', 'POST'])
+def registration():
+    if request.method=='POST':
+        id = request.form['id']
+        name = request.form['name']
+        passw = request.form['passw']
+        dept = request.form['dept']
+        email = request.form['email']
+        hod = request.form['hod']
+        check_ = login_handler.create_user(id, name, passw, dept, email, hod)
+        if check_ == False:
+            flash('User Already Exists')
+            return redirect(url_for('login'))
+        else:
+            return redirect(url_for('login'))
+    return render_template('register.html')
+
 @app.route('/employee')
 def employee_screen():
     if session['logged_in'] == True:

@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block css %}
+<link href="{{ url_for('static', filename='css/signin.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+<body class="text-center">
+   <form class="form-signin" method="POST" action="">
+     <img class="mb-4" src="{{ url_for('static', filename='nif_transparent.png') }}" alt="" width="250" height="179">
+     <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+     <label for="inputID" class="sr-only">Employee ID</label>
+     <input type="text" id="inputID" class="form-control" name="id" placeholder="Employee ID" required>
+     <label for="inputName" class="sr-only">Name</label>
+     <input type="text" id="inputID" class="form-control" name="name" placeholder="Name" required>
+     <label for="inputEmail" class="sr-only">E-Mail</label>
+     <input type="email" id="inputEmail" class="form-control" name="email" placeholder="employee@nifindia.org" required>
+     <label for="inputID" class="sr-only">Department</label>
+     <input type="text" id="inputDept" class="form-control" name="dept" placeholder="CS/IT Department" required>
+     <label for="inputDept" class="sr-only">HOD E-Mail</label>
+     <input type="email" id="inputID" class="form-control" name="hod" placeholder="hod@nifindia.org" required>
+     <label for="inputPassword" class="sr-only">Password</label>
+     <input type="password" id="inputPassword" class="form-control" name="passw" placeholder="Password" required>
+     <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+   </form>
+ </body>
+{% endblock %}

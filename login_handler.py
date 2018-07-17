@@ -1,4 +1,23 @@
 import pandas as pd
+import csv
+
+def create_user(id, name, passw, dept, email, hod):
+    login_data = pd.read_csv('login.csv')
+    length_ = len(login_data['id'])
+    for x in range(0, length_):
+        if login_data['id'][x] == id:
+            return False
+    employee_data = pd.read_csv('employee_data.csv')
+    length_ = len(employee_data['id'])
+    for x in range(0, length_):
+        if employee_data['id'][x] == id:
+            return False
+    with open('login.csv', 'a') as f:
+        writer = csv.writer(f)
+        writer.writerows([[id, passw]])
+    with open('employee_data.csv', 'a') as f:
+        writer = csv.writer(f)
+        writer.writerows([[id, name, dept, hod, email]])
 
 def authorize_login(name, passw):
     load_data = pd.read_csv('login.csv')
