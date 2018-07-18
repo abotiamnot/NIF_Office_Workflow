@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block css %}
+<link href="{{ url_for('static', filename='css/starter-template.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+{% include 'includes/navbar.html' %}
+
+<h1>Field Trip</h1>
+<div class="container">
+  <div class="card card-body bg-light">
+    <form method="POST">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+  				<label for="inputBlock">Village/ District</label>
+  				<input type="text" class="form-control" id="inputBlock" placeholder="Grambharti" name="place_">
+  			</div>
+  			<div class="form-group col-md-6">
+  				<label for="inputBlock">City</label>
+  				<input type="text" class="form-control" id="inputBlock" placeholder="Gandhinagar" name="city_">
+  			</div>
+  			<div class="form-group col-md-6">
+  				<label for="inputBlock">State</label>
+  				<input type="text" class="form-control" id="inputBlock" placeholder="Gujarat" name="state_">
+  			</div>
+      </div>
+      <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputDateStart">Starting</label>
+      <input type="date" class="form-control" id="inputDateStart" name="startdate">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputDateEnd">Ending</label>
+      <input type="date" class="form-control" id="inputDateStart" name="enddate">
+    </div>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+    {% endblock %}

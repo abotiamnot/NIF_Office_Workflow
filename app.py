@@ -32,7 +32,6 @@ def login():
             session['admin'] = False
             if 'A' in check:
                 session['admin'] = True
-                return redirect(url_for('employee_screen'))
             return redirect(url_for('employee_screen'))
     return render_template('signin.html')
 
@@ -86,6 +85,27 @@ def leave_screen():
     return render_template('leave.html')
 
 @app.route('/fieldtrip', methods=['GET', 'POST'])
+def fieldtrip_screen():
+    if session['logged_in'] == True:
+        if request.method=='POST':
+            place = request.form['place_']
+            city = request.form['city_']
+            state = request.form['state_']
+            startdate = request.form['startdate']
+            enddate = request.form['enddate']
+            region = "{}, {}, {}".format(place, city, state)
+            mail = Mail(app)
+            message = "{} from {} will be on a field trip from {} to {}. The location is {}".format(session['important_details']['name'],
+                                                                             session['important_details']['department'], start_date, end_date,
+                                                                            region)
+            subject = "Field Trip - {}".format(session['important_details']['name'])
+            msg = Message(subject,
+                          sender="<"+session['important_details']['name']+">",
+                          recipients=[session['important_details']['hod']])
+            msg.body = message
+            mail.send(msg)
+            database_handler.leave(session['important_details']['id'], startdate, enddate, 'Field Trip', '', region)
+    return render_template('fieldtrip.html')
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_screen():
