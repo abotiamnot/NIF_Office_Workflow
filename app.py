@@ -1,4 +1,4 @@
-from flask import Flask, render_template, g, redirect, flash, url_for, session, request, flash
+from flask import Flask, render_template, g, redirect, flash, url_for, session, request, flash, send_file
 from flask_mail import Mail, Message
 import os, datetime
 import login_handler, database_handler
@@ -9,8 +9,8 @@ app.config.update(DEBUG=True,
                   MAIL_SERVER='smtp.gmail.com',
                   MAIL_PORT=465,
                   MAIL_USE_SSL=True,
-                  MAIL_USERNAME = 'fillit',
-                  MAIL_PASSWORD = 'fillit')
+                  MAIL_USERNAME = '<>',
+                  MAIL_PASSWORD = '<>')
 
 @app.route('/')
 def main():
@@ -52,9 +52,14 @@ def registration():
             return redirect(url_for('login'))
     return render_template('register.html')
 
-@app.route('/employee')
+@app.route('/employee', methods=['GET', 'POST'])
 def employee_screen():
     if session['logged_in'] == True:
+        if request.method == 'POST':
+            id = session['important_details']['id']
+            database_handler.generate(id)
+            fname = '{} Employee Record.csv'.format(id)
+            return send_file(fname, mimetype='text/csv', as_attachment=True, attachment_filename="Employee_Record.csv")
         return render_template('employee.html', username=session['important_details']['id'],
                                            name=session['important_details']['name'],
                                            dept=session['important_details']['department'],
@@ -73,7 +78,7 @@ def leave_screen():
             reason = request.form['reason']
             mail = Mail(app)
             message = "{} from {} will be on a leave from {} to {}. The reason stated as, {}".format(session['important_details']['name'],
-                                                                            start_date, end_date, session['important_details']['department'],
+                                                                            session['important_details']['department'], start_date, end_date,
                                                                             reason)
             subject = "Leave - {}".format(session['important_details']['name'])
             msg = Message(subject,
@@ -113,6 +118,8 @@ def admin_screen():
         if request.method =='POST':
             id = request.form['generate_report_id']
             database_handler.generate(id)
+            fname = '{} Employee Record.csv'.format(id)
+            return send_file(fname, mimetype='text/csv', as_attachment=True, attachment_filename="Employee_Record.csv")
         return render_template('admin.html')
     else:
         flash('You are not an ADMIN')
