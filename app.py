@@ -96,8 +96,8 @@ def fieldtrip_screen():
             place = request.form['place_']
             city = request.form['city_']
             state = request.form['state_']
-            startdate = request.form['startdate']
-            enddate = request.form['enddate']
+            start_date = request.form['startdate']
+            end_date = request.form['enddate']
             region = "{}, {}, {}".format(place, city, state)
             mail = Mail(app)
             message = "{} from {} will be on a field trip from {} to {}. The location is {}".format(session['important_details']['name'],
